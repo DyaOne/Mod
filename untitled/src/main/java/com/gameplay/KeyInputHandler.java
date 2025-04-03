@@ -11,8 +11,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 
-@OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = "untitled", value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = "untitled", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class KeyInputHandler {
 
     public static final KeyBinding OPEN_INVENTORY_KEY = new KeyBinding(
@@ -28,7 +27,10 @@ public class KeyInputHandler {
     @SubscribeEvent
     public static void onKeyInput(InputEvent.KeyInputEvent event) {
         if (OPEN_INVENTORY_KEY.consumeClick()) {
-            Minecraft.getInstance().setScreen(new CharacterInventoryScreen());
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.player != null && mc.screen == null) {
+                mc.setScreen(new CharacterInventoryScreen());
+            }
         }
     }
 }

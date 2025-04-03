@@ -1,6 +1,5 @@
 package com.gameplay.disabler;
 
-import com.gameplay.inventory.player.CharacterInventoryScreen;
 import net.minecraft.client.gui.screen.IngameMenuScreen;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -61,7 +60,6 @@ public class GameplayDisabler {
     @SubscribeEvent
     public void onGuiOpen(GuiOpenEvent event) {
         if (event.getGui() != null &&
-                !(event.getGui() instanceof CharacterInventoryScreen) &&
                 (event.getGui() instanceof InventoryScreen || event.getGui() instanceof IngameMenuScreen)) {
             event.setCanceled(true);
         }
