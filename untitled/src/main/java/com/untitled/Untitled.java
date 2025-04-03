@@ -47,8 +47,6 @@ public class Untitled {
         MinecraftForge.EVENT_BUS.register(new RecipeDisabler());
         FMLJavaModLoadingContext.get().getModEventBus().addListener(PlayerAttributesCapability::register);
         MinecraftForge.EVENT_BUS.register(PlayerCapabilityEvents.class);
-        MinecraftForge.EVENT_BUS.register(ClientEvents.class);
-        MinecraftForge.EVENT_BUS.register(KeyInputHandler.class);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
