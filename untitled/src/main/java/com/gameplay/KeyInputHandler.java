@@ -26,8 +26,11 @@ public class KeyInputHandler {
 
     @SubscribeEvent
     public static void onKeyInput(InputEvent.KeyInputEvent event) {
-        if (OPEN_INVENTORY_KEY.consumeClick()) {
-            Minecraft.getInstance().setScreen(new CharacterInventoryScreen());
+        if (event.getKey() == GLFW.GLFW_KEY_TAB && event.getAction() == GLFW.GLFW_PRESS) {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.screen == null && mc.player != null) {
+                mc.setScreen(new CharacterInventoryScreen());
+            }
         }
     }
 }
