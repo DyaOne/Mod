@@ -63,10 +63,7 @@ public class GameplayDisabler {
         if (event.getGui() != null &&
                 !(event.getGui() instanceof CharacterInventoryScreen) &&
                 (event.getGui() instanceof InventoryScreen || event.getGui() instanceof IngameMenuScreen)) {
-
             event.setCanceled(true);
-
         }
-
     }
 }
