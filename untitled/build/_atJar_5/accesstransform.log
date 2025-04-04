@@ -1,0 +1,9 @@
+[21:19:27] [main/INFO]: Writing debug log file accesstransform.log
+[21:19:27] [main/INFO]: Access Transformer processor running version 8.0.7+8.0.7+master.43473d43
+[21:19:27] [main/INFO]: Command line arguments [--inJar, E:\Mod\Mod\untitled\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.42\forge-1.16.5-36.2.42-injected.jar, --outJar, E:\Mod\Mod\untitled\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.42_mapped_official_1.16.5\forge-1.16.5-36.2.42_mapped_official_1.16.5.jar, --logFile, accesstransform.log, --atFile, E:\Mod\Mod\untitled\src\main\resources\META-INF\accesstransformer.cfg, --atFile, E:\Mod\Mod\untitled\build\_atJar_5\parent_at.cfg]
+[21:19:27] [main/INFO]: Reading from E:\Mod\Mod\untitled\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.42\forge-1.16.5-36.2.42-injected.jar
+[21:19:27] [main/INFO]: Writing to E:\Mod\Mod\untitled\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.42_mapped_official_1.16.5\forge-1.16.5-36.2.42_mapped_official_1.16.5.jar
+[21:19:27] [main/INFO]: Transformer file E:\Mod\Mod\untitled\src\main\resources\META-INF\accesstransformer.cfg
+[21:19:27] [main/INFO]: Transformer file E:\Mod\Mod\untitled\build\_atJar_5\parent_at.cfg
+[21:19:27] [main/WARN]: Found existing output jar E:\Mod\Mod\untitled\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.42_mapped_official_1.16.5\forge-1.16.5-36.2.42_mapped_official_1.16.5.jar, overwriting
+[21:19:27] [main/DEBUG]: Loading access transformer accesstransformer.cfg from path E:\Mod\Mod\untitled\src\main\resources\META-INF\accesstransformer.cfg

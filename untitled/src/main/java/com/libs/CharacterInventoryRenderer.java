@@ -1,51 +1,91 @@
 package com.libs;
 
+import com.libs.api.mouse.MouseAPI;
+import com.libs.gui.InventoryConfig;
+import com.libs.gui.InventoryGrid;
+import com.libs.gui.InventoryManager;
+import com.libs.gui.InventoryRenderer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-@Mod.EventBusSubscriber(modid = "untitled", value = Dist.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class CharacterInventoryRenderer {
 
     private static final Minecraft mc = Minecraft.getInstance();
-    private static boolean isOpen = false;
 
-    // Примерная текстура (можно заменить своей)
-    private static final ResourceLocation TEXTURE = new ResourceLocation("minecraft", "textures/item/apple.png");
+    private static InventoryConfig config;
+    private static InventoryGrid playerInventory;
 
-    public static void open() {
-        isOpen = true;
+    public static void updateLayout() {
+
+
+        int screenWidth = mc.getWindow().getGuiScaledWidth();
+        int screenHeight = mc.getWindow().getGuiScaledHeight();
+
+        int columns = 10;
+        int rows = 6;
+
+        int margin = 40;
+        int maxGridWidth = screenWidth - margin * 2;
+        int maxGridHeight = screenHeight - margin * 2;
+
+        int tileSizeByWidth = maxGridWidth / columns;
+        int tileSizeByHeight = maxGridHeight / rows;
+
+        int tileSize = Math.min(tileSizeByWidth, tileSizeByHeight);
+        tileSize = Math.min(tileSize, 32); // 🔒 максимум 32px
+        tileSize = Math.max(tileSize, 12); // 🔒 минимум 12px
+
+        int gridWidth = tileSize * columns;
+        int gridHeight = tileSize * rows;
+
+        int xOffset = (screenWidth - gridWidth) / 6;
+        int yOffset = (screenHeight - gridHeight) / 6;
+
+        // Обновляем конфигурацию и инвентарь
+        config = new InventoryConfig(columns, rows, xOffset, yOffset, tileSize);
+        playerInventory = new InventoryGrid(config);
     }
 
-    public static void close() {
-        isOpen = false;
-    }
+    public static void renderIfOpen(boolean isOpen) {
+        if (!isOpen) return;
 
-    public static boolean isOpen() {
-        return isOpen;
-    }
+        if (playerInventory == null) {
+            updateLayout(); // инициализируем при первом рендере
+        }
 
-    @SubscribeEvent
-    public static void onRenderGameOverlay(RenderGameOverlayEvent.Post event) {
-        if (!isOpen || event.getType() != RenderGameOverlayEvent.ElementType.ALL) return;
+        MatrixStack matrixStack = new MatrixStack();
 
-        MatrixStack matrixStack = event.getMatrixStack();
-        int xStart = mc.getWindow().getGuiScaledWidth() / 2 - 90;
-        int yStart = mc.getWindow().getGuiScaledHeight() / 2 - 90;
+        // Рендер сетки
+        InventoryRenderer.render(matrixStack, playerInventory);
 
-        // Рисуем сетку 5x5
-        mc.getTextureManager().bind(TEXTURE);
-        for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 5; col++) {
-                int x = xStart + col * 20;
-                int y = yStart + row * 20;
-                AbstractGui.blit(matrixStack, x, y, 0, 0, 16, 16, 16, 16);
+        // Блокировка управления
+        if (mc.player != null && mc.player.input != null) {
+            mc.player.input.forwardImpulse = 0;
+            mc.player.input.leftImpulse = 0;
+            mc.player.input.jumping = false;
+            mc.player.input.shiftKeyDown = false;
+        }
+        if (MouseAPI.isMouseLocked()) {
+            double x = MouseAPI.getMouseX();
+            double y = MouseAPI.getMouseY();
+
+            if (MouseAPI.isLeftPressed()) {
+                // Обработка клика
             }
         }
+        // Рендер предмета под курсором
+        if (InventoryManager.getHeldItem() != null) {
+            int mouseX = (int) MouseAPI.getMouseX();
+            int mouseY = (int) MouseAPI.getMouseY();
+
+            InventoryRenderer.renderHeldItem(matrixStack, InventoryManager.getHeldItem(), mouseX, mouseY, config.tileSize);
+        }
+    }
+
+    public static InventoryGrid getInventory() {
+        return playerInventory;
     }
 }

@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinMouseHelper"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "mixins.untitled.refmap.json"
+}

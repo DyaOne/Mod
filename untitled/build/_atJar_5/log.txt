@@ -1,0 +1,7 @@
+Java Launcher: C:\Users\seran\.jdks\temurin-1.8.0_442\bin\java.exe
+Arguments: '--inJar, E:\Mod\Mod\untitled\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.42\forge-1.16.5-36.2.42-injected.jar, --outJar, E:\Mod\Mod\untitled\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.42_mapped_official_1.16.5\forge-1.16.5-36.2.42_mapped_official_1.16.5.jar, --logFile, accesstransform.log, --atFile, E:\Mod\Mod\untitled\src\main\resources\META-INF\accesstransformer.cfg, --atFile, E:\Mod\Mod\untitled\build\_atJar_5\parent_at.cfg'
+Classpath:
+ - C:\Users\seran\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\accesstransformers\8.0.7\accesstransformers-8.0.7-fatjar.jar
+Working directory: E:\Mod\Mod\untitled\build\_atJar_5
+Main class: net.minecraftforge.accesstransformer.TransformerProcessor
+====================================

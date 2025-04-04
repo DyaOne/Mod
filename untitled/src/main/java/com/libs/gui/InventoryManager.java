@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class InventoryManager {
     private static final Map<String, InventoryGrid> inventories = new HashMap<>();
+    private static InventoryItem heldItem;
+
 
     public static void registerInventory(String id, InventoryGrid grid) {
         inventories.put(id, grid);
@@ -24,5 +26,9 @@ public class InventoryManager {
 
     public static Map<String, InventoryGrid> getAllInventories() {
         return inventories;
+    }
+
+    public static InventoryItem getHeldItem() {
+        return heldItem;
     }
 }

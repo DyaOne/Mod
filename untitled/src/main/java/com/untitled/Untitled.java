@@ -2,6 +2,7 @@ package com.untitled;
 
 import com.attribute.player.PlayerAttributesCapability;
 import com.attribute.player.PlayerCapabilityEvents;
+import com.events.ClientSetup;
 import com.gameplay.disabler.GameplayDisabler;
 import com.gameplay.disabler.RecipeDisabler;
 import net.minecraft.block.Block;
@@ -14,7 +15,6 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.events.ClientEvents;
 
 @Mod("untitled")
 public class Untitled {
@@ -32,7 +32,7 @@ public class Untitled {
     }
 
     private void onClientSetup(final FMLClientSetupEvent event) {
-        ClientEvents.onClientSetup(event);
+        ClientSetup.onClientSetup(event);
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)

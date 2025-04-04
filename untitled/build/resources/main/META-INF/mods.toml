@@ -32,6 +32,7 @@ displayName="untitled" #mandatory
 authors="" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description=''''''
+mixins = "mixins.untitled.json"
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies."untitled"]] #optional
    # the modid of the dependency
@@ -53,3 +54,4 @@ description=''''''
    versionRange="[1.16.5,1.17)"
    ordering="NONE"
    side="BOTH"
+
